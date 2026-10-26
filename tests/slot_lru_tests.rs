@@ -28,9 +28,9 @@ impl Render for RootHost {
     }
 }
 
-#[test]
-fn test_slot_navigator_lru_caching_and_lifecycle() {
-    gpui::application().run(|cx| {
+#[gpui::test]
+fn test_slot_navigator_lru_caching_and_lifecycle(cx: &mut gpui::TestAppContext) {
+    cx.update(|cx| {
         let parent = cx.new(|_| RootHost);
         parent.update(cx, |_host, cx| {
             // LRU capacity = 2 cached screens
@@ -108,6 +108,5 @@ fn test_slot_navigator_lru_caching_and_lifecycle() {
             assert!(slot.active_config().is_none());
             assert_eq!(slot.cache_len(), 0);
         });
-        cx.quit();
     });
 }

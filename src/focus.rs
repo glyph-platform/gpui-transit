@@ -36,9 +36,9 @@ impl FocusStack {
     /// Pops the topmost saved focus handle and restores focus to it.
     ///
     /// Returns `true` if a handle was restored, `false` if the stack was empty.
-    pub fn pop_and_restore(&mut self, window: &mut Window, _cx: &mut App) -> bool {
+    pub fn pop_and_restore(&mut self, window: &mut Window, cx: &mut App) -> bool {
         if let Some(handle) = self.stack.pop() {
-            window.focus(&handle);
+            window.focus(&handle, cx);
             true
         } else {
             false
@@ -78,7 +78,7 @@ pub trait WindowFocusExt {
 impl WindowFocusExt for Window {
     fn focus_target<F: NavFocusable>(&mut self, target: &F, cx: &mut App) -> bool {
         if let Some(handle) = target.focus_handle(cx) {
-            self.focus(&handle);
+            self.focus(&handle, cx);
             true
         } else {
             false

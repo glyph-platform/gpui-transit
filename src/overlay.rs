@@ -113,7 +113,7 @@ impl<C: RouteConfig, V: Render + 'static> OverlayNavigator<C, V> {
         if let Some(top) = self.entries.last()
             && let Some(handle) = top.entity.read(cx).focus_handle(cx)
         {
-            window.focus(&handle);
+            window.focus(&handle, cx);
         }
     }
 
@@ -155,7 +155,7 @@ impl<C: RouteConfig, V: Render + 'static> OverlayNavigator<C, V> {
         if let Some(top) = self.entries.last()
             && let Some(handle) = top.entity.read(cx).focus_handle(cx)
         {
-            window.focus(&handle);
+            window.focus(&handle, cx);
         }
     }
 

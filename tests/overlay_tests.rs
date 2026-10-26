@@ -32,9 +32,9 @@ impl Render for RootHost {
     }
 }
 
-#[test]
-fn test_overlay_navigator_presentation_and_kinds() {
-    gpui::application().run(|cx| {
+#[gpui::test]
+fn test_overlay_navigator_presentation_and_kinds(cx: &mut gpui::TestAppContext) {
+    cx.update(|cx| {
         let parent = cx.new(|_| RootHost);
         parent.update(cx, |_host, cx| {
             let mut overlay: OverlayNavigator<ModalRoute, ModalScreen> = OverlayNavigator::new();
@@ -94,6 +94,5 @@ fn test_overlay_navigator_presentation_and_kinds() {
             assert!(!overlay.is_presented());
             assert_eq!(overlay.len(), 0);
         });
-        cx.quit();
     });
 }

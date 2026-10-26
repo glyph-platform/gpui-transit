@@ -272,9 +272,9 @@ impl<C: RouteConfig, V: Render + 'static> StackNavigator<C, V> {
             if let Some(top) = self.entries.last_mut() {
                 top.set_lifecycle(ScreenLifecycle::Resumed);
                 if let Some(saved) = top.take_saved_focus() {
-                    window.focus(&saved);
+                    window.focus(&saved, cx);
                 } else if let Some(handle) = top.entity.read(cx).focus_handle(cx) {
-                    window.focus(&handle);
+                    window.focus(&handle, cx);
                 }
             }
             cx.notify();
@@ -422,7 +422,7 @@ impl<C: RouteConfig, V: Render + 'static> StackNavigator<C, V> {
         if let Some(entry) = self.entries.last()
             && let Some(handle) = entry.entity.read(cx).focus_handle(cx)
         {
-            window.focus(&handle);
+            window.focus(&handle, cx);
             return true;
         }
         false

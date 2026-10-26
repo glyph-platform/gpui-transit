@@ -31,9 +31,9 @@ impl Render for RootHost {
     }
 }
 
-#[test]
-fn test_stack_basic_logic() {
-    gpui::application().run(|cx| {
+#[gpui::test]
+fn test_stack_basic_logic(cx: &mut gpui::TestAppContext) {
+    cx.update(|cx| {
         let parent = cx.new(|_| RootHost);
         parent.update(cx, |_host, cx| {
             let mut stack: StackNavigator<TestRoute, TestScreen> = StackNavigator::new_empty();
@@ -81,6 +81,5 @@ fn test_stack_basic_logic() {
             assert_eq!(stack.current_config(), Some(&TestRoute::Home));
             assert!(!stack.can_go_back());
         });
-        cx.quit();
     });
 }

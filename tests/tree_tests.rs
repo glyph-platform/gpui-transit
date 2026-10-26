@@ -24,9 +24,9 @@ impl Render for RootHost {
     }
 }
 
-#[test]
-fn test_navigation_tree_node_bubbling() {
-    gpui::application().run(|cx| {
+#[gpui::test]
+fn test_navigation_tree_node_bubbling(cx: &mut gpui::TestAppContext) {
+    cx.update(|cx| {
         let _ = cx.open_window(WindowOptions::default(), |window, cx| {
             let parent = cx.new(|_| RootHost);
             parent.update(cx, |_host, cx| {
@@ -53,8 +53,6 @@ fn test_navigation_tree_node_bubbling() {
                 assert_eq!(flow2, NavigationFlow::BubbleUp);
                 assert_eq!(stack.len(), 1);
             });
-
-            cx.quit();
             cx.new(|_| RootHost)
         });
     });

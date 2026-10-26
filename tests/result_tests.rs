@@ -32,9 +32,9 @@ impl Render for RootHost {
     }
 }
 
-#[test]
-fn test_push_for_result_success() {
-    gpui::application().run(|cx| {
+#[gpui::test]
+fn test_push_for_result_success(cx: &mut gpui::TestAppContext) {
+    cx.update(|cx| {
         let parent = cx.new(|_| RootHost);
         parent.update(cx, |_host, cx| {
             let mut stack = StackNavigator::new_empty();
@@ -54,6 +54,5 @@ fn test_push_for_result_success() {
             let val = rx.blocking_recv().expect("Should receive result value");
             assert_eq!(val, "Selected Item 42");
         });
-        cx.quit();
     });
 }
