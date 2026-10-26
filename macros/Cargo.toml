@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 description = "Procedural macros for gpui-transit navigation framework"
-repository = "https://github.com/glyph-messenger/gpui-transit"
+repository = "https://github.com/glyph-platform/gpui-transit"
 
 [lib]
 proc-macro = true
